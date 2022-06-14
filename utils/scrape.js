@@ -1,8 +1,11 @@
 const puppeteer = require('puppeteer');
-const express = require('express');
-const app = express();
 const db = require('../db');
-const Job = require('../models/job'); 
+const Job = require('../models/job');
+// const express = require('express');
+// const app = express();
+// const jobRouter = require('../routes/jobRoutes');
+
+// app.use(jobRouter);
 
 (async () => {
     try {
@@ -47,14 +50,16 @@ const Job = require('../models/job');
                 seeMoreJobs();
             }
             Job.insertMany(data)
-                .then(val => {
+                .then(() => {
                     console.log('Save successful.')
+                })
+                .then(() => {
+                    console.log(data);
+                    page.close();
                 })
                 .catch(err => {
                     console.log(err)
                 })
-            console.log(data);
-            // await page.close();
         }
         scroll(); 
 
@@ -71,11 +76,12 @@ const Job = require('../models/job');
             const namesAndUrls = allJobsArr.map(job => {
                 return {
                     name: job.innerText,
-                    url: job.href
+                    url: job.href,
+                    path: job.pathname
                 }
             });
             const juniorJobs = namesAndUrls.filter(function(job) {
-                return job.name.includes('Junior') && job.url;
+                return job.name.includes('Junior') || job.name.includes('Jr') || job.name.includes('Entry') && job.url && job.path;
             });
             return juniorJobs;
         });

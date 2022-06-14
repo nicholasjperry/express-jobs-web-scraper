@@ -11,6 +11,11 @@ const JobSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    path: {
+        type: String,
+        required: true,
+        unique: true
     }
 });
 
