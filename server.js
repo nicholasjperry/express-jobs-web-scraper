@@ -1,10 +1,9 @@
 const express = require('express');
+require('./utils/scrape');
 const bodyParser = require('body-parser');
 
 const PORT = 8000;
 const app = express();
-
-require('./utils/scrape');
 
 // Parse results 
 app.use(bodyParser.json());

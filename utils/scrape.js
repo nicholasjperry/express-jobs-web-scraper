@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const db = require('../db');
+require('../db');
 const Job = require('../models/job');
 
 (async () => {
@@ -7,7 +7,7 @@ const Job = require('../models/job');
         const browser = await puppeteer.launch({
             headless: false,
             defaultViewport: null,
-            // args: ['--no-zygote', '--no-sandbox']
+            args: ['--no-zygote', '--no-sandbox']
         });
         const url = 'https://www.linkedin.com/jobs/search?keywords=Junior%20Software%20Developer&location=Indianapolis%2C%20IN&geoId=&trk=homepage-jobseeker_jobs-search-bar_search-submit&position=1&pageNum=0';
 
@@ -44,7 +44,6 @@ const Job = require('../models/job');
                 lastHeight = newHeight;
                 seeMoreJobs();
             }
-
             // Scrape all junior job titles
             const data = await page.evaluate(() => {
                 const allJobsArr = Array.from(document.querySelectorAll('a[data-tracking-control-name="public_jobs_jserp-result_search-card"]'));
@@ -55,27 +54,24 @@ const Job = require('../models/job');
                         path: job.pathname
                     }
                 });
-                return namesAndUrls;
-                // const juniorJobs = namesAndUrls.filter(function(job) {
-                //     return job.name.includes('Junior') || job.name.includes('Jr') || job.name.includes('Entry') && job.url && job.path;
-                // });
-                // return juniorJobs;
+                const juniorJobs = namesAndUrls.filter(function(job) {
+                    return job.name.includes('Junior') || job.name.includes('Jr') || job.name.includes('Entry') && job.url && job.path;
+                });
+                return juniorJobs;
             });
-            // Job.insertMany(data)
-            //     .then(() => {
-            //         console.log(data);
-            //     })
-            //     .then(() => {
-            //         console.log('Save successful.')
-            //         page.close();
-            //     })
-            //     .catch(err => {
-            //         console.log(err)
-            //     })
-            // Click on 'See More Jobs'
-            console.log(data);
+            Job.insertMany(data)
+                .then(() => {
+                    console.log(data);
+                })
+                .then(() => {
+                    console.log('Save successful.')
+                    page.close();
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         }
-        
+        // Click on 'See More Jobs'
         const seeMoreJobs = async () => {
             await page.evaluate(() => {
                 document.querySelector('button[data-tracking-control-name="infinite-scroller_show-more"]').click();
