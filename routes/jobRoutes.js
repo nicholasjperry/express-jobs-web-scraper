@@ -1,8 +1,8 @@
 const express = require("express");
-const app = express();
 const Job = require('../models/job');
+const router = express.Router();
 
-app.get('/', async(req, res) => {
+router.get('/jobs', async(req, res) => {
     const jobs = await Job.find({});
     try {
         res.send(jobs)
@@ -11,7 +11,7 @@ app.get('/', async(req, res) => {
     }
 });
 
-app.post('/', async(req, res) => {
+router.post('/jobs', async(req, res) => {
     const job = new Job(req.body);
     try {
         await job.save();
@@ -21,4 +21,4 @@ app.post('/', async(req, res) => {
     }
 })
 
-module.exports = app;
+module.exports = router;
