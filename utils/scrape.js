@@ -4,7 +4,7 @@ const Job = require('../models/job');
 (async () => {
     try {
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             defaultViewport: null,
             args: ['--no-zygote', '--no-sandbox']
         });
