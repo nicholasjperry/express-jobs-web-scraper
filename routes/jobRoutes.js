@@ -11,6 +11,27 @@ router.get('/jobs', async(req, res) => {
     }
 });
 
+router.patch('/jobs/:id', async(req, res) => {
+    try {
+        const job = await Job.findOne({ _id: req.params.id });
+        if(req.body.name) {
+            job.name = req.body.name;
+        }
+        if(req.body.url) {
+            job.url = req.body.url;
+        }
+        if(req.body.path) {
+            job.path = req.body.path;
+        }
+        await job.save();
+        res.send(job);
+
+    } catch {
+        res.status(404);
+        res.send({ error: 'Job does not exist!' });
+    }
+});
+
 router.post('/jobs', async(req, res) => {
     const job = new Job(req.body);
     try {
@@ -20,10 +41,6 @@ router.post('/jobs', async(req, res) => {
         res.status(500).send(err);
     }
 });
-
-// router.update('/jobs', async(req, res) => {
-
-// });
 
 // router.delete('/jobs', async(req, res) => {
     
