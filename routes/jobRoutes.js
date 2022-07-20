@@ -19,6 +19,14 @@ router.post('/jobs', async(req, res) => {
     } catch(err) {
         res.status(500).send(err);
     }
-})
+});
+
+// router.update('/jobs', async(req, res) => {
+
+// });
+
+// router.delete('/jobs', async(req, res) => {
+    
+// });
 
 module.exports = router;

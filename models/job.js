@@ -4,17 +4,17 @@ const mongoose = require('mongoose');
 const JobSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        // required: true,
         unique: false
     },
     url: {
         type: String,
-        required: true,
+        // required: true,
         unique: true
     },
     path: {
         type: String,
-        required: true,
+        // required: true,
         unique: true
     }
 });

@@ -1,2 +1,4 @@
 require('./db');
-require('./utils/scrape');
+const { scrape } = require('./utils/scrape');
+
+scrape();
