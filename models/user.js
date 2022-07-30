@@ -1,8 +1,4 @@
 const mongoose = require('mongoose');
-// const uniqueValidator = require('mongoose-unique-validator');
-// const crypto = require('crypto');
-// const jwt = require('jsonwebtoken');
-
 
 // User schema
 const UserSchema = new mongoose.Schema({
@@ -18,9 +14,6 @@ const UserSchema = new mongoose.Schema({
         index: true
     }
 }, {timestamps: true});
-
-// UserSchema.plugin(uniqueValidator, {message: 'is already taken.'});
-
 
 // Schema created into a model to be exported and used 
 const User = mongoose.model('User', UserSchema, 'users');

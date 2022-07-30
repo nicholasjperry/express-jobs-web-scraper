@@ -6,20 +6,6 @@ const router = express.Router();
 
 const User = require('../models/user');
 
-// router.get('/users', async(req, res) => {
-//     const users = await User.find({});
-//     try {
-//         res.send(users)
-//     } catch(err) {
-//         res.status(500).send(err)
-//     }
-// });
-
-// router.get("/users/:id", async (req, res) => {
-// 	const user = await User.findOne({ _id: req.params.id });
-// 	res.send(user);
-// });
-
 router.post('/register', 
     [
         check("email", "Please Enter a Valid Email.")
@@ -137,29 +123,9 @@ router.post('/login',
             console.log(err);
             res.status(500).json({
                 message: "Server Error."
-            })
+            });
         }
     }
-)
-
-// router.post('/users/login', async(req, res) => {
-//     const user = new User(req.body);
-//     try {
-//         await user.save();
-//         res.send(user);
-//     } catch(err) {
-//         res.status(500).send(err);
-//     }
-// });
-
-// router.delete('/users/:id', async(req, res) => {
-//     try {
-//         await User.deleteOne({ _id: req.params.id });
-//         res.send(204).send();
-//     } catch {
-//         res.status(404);
-//         res.send({ error: "User doesn't exist" })
-//     }
-// });
+);
 
 module.exports = router;
