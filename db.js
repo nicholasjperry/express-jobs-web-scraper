@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const routes = require('./routes/jobRoutes');
+const jobRoutes = require('./routes/jobRoutes');
+const route = require('./routes/route');
+const userRoutes = require('./routes/userRoutes');
 if(process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
@@ -17,7 +19,8 @@ mongoose
         const app = express();
         const PORT = 8000;
         app.use(express.json());
-        app.use('/api', routes);
+        app.use('/api', jobRoutes);
+        app.use('/', userRoutes, route);
 
         app.listen(PORT, () => console.log(`The server is running on PORT: ${PORT}`));
     });

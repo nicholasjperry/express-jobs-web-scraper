@@ -28,7 +28,7 @@ router.patch('/jobs/:id', async(req, res) => {
 
     } catch {
         res.status(404);
-        res.send({ error: 'Job does not exist!' });
+        res.send({ error: "Job doesn't exist!" });
     }
 });
 
@@ -42,8 +42,14 @@ router.post('/jobs', async(req, res) => {
     }
 });
 
-// router.delete('/jobs', async(req, res) => {
-    
-// });
+router.delete('/jobs/:id', async(req, res) => {
+    try {
+        await Job.deleteOne({ _id: req.params.id });
+        res.send(204).send();
+    } catch {
+        res.status(404);
+        res.send({ error: "Job doesn't exist" })
+    }
+});
 
 module.exports = router;
