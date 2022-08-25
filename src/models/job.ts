@@ -1,7 +1,13 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
+
+interface IJob {
+    name: string,
+    url: string,
+    path: string
+}
 
 // Junior jobs data schema
-const JobSchema = new mongoose.Schema({
+const JobSchema = new Schema<IJob>({
     name: {
         type: String,
         required: true,
@@ -20,6 +26,6 @@ const JobSchema = new mongoose.Schema({
 });
 
 // Schema created into a model to be exported and used 
-const Job = mongoose.model('Job', JobSchema, 'jobs');
+const Job = model<IJob>('Job', JobSchema, 'jobs');
 
 module.exports = Job;

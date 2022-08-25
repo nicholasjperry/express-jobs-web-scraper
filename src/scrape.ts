@@ -1,5 +1,5 @@
 const puppeteer = require('puppeteer');
-const Job = require('../models/job');
+const Job = require('./models/job');
 
 const scrape = async () => {
     try {
