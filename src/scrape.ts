@@ -45,7 +45,7 @@ const scrape = async () => {
             }
             // Scrape all titles that include keywords jr, junior, or entry within the post's job title
             const data = await page.evaluate(() => {
-                const allJobsArr = Array.from(document.querySelectorAll('a[data-tracking-control-name="public_jobs_jserp-result_search-card"]'));
+                const allJobsArr = Array.from(document.querySelectorAll<HTMLAnchorElement>('a[data-tracking-control-name="public_jobs_jserp-result_search-card"]'));
                 const namesAndUrls = allJobsArr.map(job => {
                     return {
                         name: job.innerText,
@@ -68,7 +68,7 @@ const scrape = async () => {
                         console.log('Save successful.')
                         // page.close();
                     })
-                    .catch(err => {
+                    .catch((err: string) => {
                         console.log(err)
                     }
                 );
@@ -79,7 +79,10 @@ const scrape = async () => {
         // Click on 'See More Jobs'
         const seeMoreJobs = async () => {
             await page.evaluate(() => {
-                document.querySelector('button[data-tracking-control-name="infinite-scroller_show-more"]').click();
+                const el = document.querySelector<HTMLElement>('button[data-tracking-control-name="infinite-scroller_show-more"]');
+                if(el !== null){
+                    el.click();
+                }
             });
         }
         scroll(); 
