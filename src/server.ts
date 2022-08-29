@@ -1,6 +1,6 @@
 import { Application } from 'express';
+import express from 'express';
 
-const express = require('express');
 const app: Application = express();
 const PORT = 8000;
 const jobRoutes = require('./routes/jobRoutes');

@@ -32,7 +32,7 @@ router.post('/user/register',
             });
         }
 
-        // Data accessed from the client side; it is received from POST request made to Express server.
+        // Data accessed from the client side; it is received from the POST request made to Express server.
         const { email, password } = req.body;
 
         try {
