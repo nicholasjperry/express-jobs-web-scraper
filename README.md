@@ -6,7 +6,7 @@
   2) Types in the position and locaiton fields.
   3) Scrolls to the bottom of the page,
   4) Scrapes all titles that include 'jr', 'junior', or 'entry' within the post's job title.
-  5) Bulk insert of jobs based on the aforementioned critera into MongoDB database.
+  5) Bulk insert of jobs based on the aforementioned critera into a MongoDB database.
   6) Clicks on 'See More Jobs' and repeats until `lastHeight` === `newHeight`.
  
 # Installation and Usage
