@@ -1,6 +1,6 @@
 # Description
 - This is a small project that somewhat assisted me in filtering and automating the search for my first software developer job.  It was conceived out of a necessity to swiften and efficiently look for jobs.
-- It is a vanilla JavaSript/Node application.
+- It is a vanilla JavaSript/Node.js application.
 - In essence, the project consists of a singular `scrape.ts` file, in which I invoke a `puppeteer` instance that:
   1) Opens the browser instance.
   2) Types in the position and locaiton fields.
